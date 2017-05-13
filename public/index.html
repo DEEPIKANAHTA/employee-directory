@@ -1,0 +1,84 @@
+</!DOCTYPE html>
+<html ng-app = "Mainapp">
+<head>
+<title>Employee data</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.min.js"></script>
+
+<link rel="icon" href="/images/favicon.jpg" type="image/x-icon"/>
+<script src="/js/homepage.controller.js"></script>
+<style type="text/css">
+	td,th {
+		text-align: center;
+	}
+
+	.search{ 
+		border-radius: 5px;
+	}
+
+	.alignRight {
+		float: right;
+	}
+
+	.marginTop {
+		margin-top: 35px;
+	}
+
+
+</style>
+
+</head>
+<body ng-controller="homecontroller" class="container bg-success">
+<div class="page-header">
+	<h1 class="text-center" >Employee Directory</h1>
+</div>
+<button type="button"  ng-click="redirectToAddUser()" class="btn btn-primary text-right">Add New Employee</button>
+<span class="alignRight">
+<label for="search">Search </label> 
+<input  id="search" type="text" name="" ng-model="searchBox" placeholder="search" class="search">
+</span>
+<div>
+<div id="displayEmployeeData" class="table-responsive marginTop">
+<table class="table table-striped">
+  <thead class="thead-inverse">
+      <tr>
+	      <th >#</th>
+	      <th>First Name</th>
+	      <th>Middle Name</th>
+	      <th>Last Name</th>
+	      <th>Email</th>
+	      <th>DOB</th>
+	      <th>Department</th>
+	      <th>gender</th>
+	      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+	<tr ng-repeat="user in usersdata | filter:searchBox">
+        <td>{{$index + 1}}</td>
+		<td >{{user.firstName}}</td>
+		<td >{{user.middleName}}</td>
+		<td >{{user.lastName}}</td>
+		<td >{{user.email}}</td>
+		<td >{{user.dob| date:'dd/MM/yyyy'}}</td>
+		<td >{{user.department}}</td>
+		<td >{{user.gender}}</td>
+		<td >{{user.age}} yr</td>
+		<td>
+			<button class="btn btn-warning" ng-click="modifyUser(user)">Edit</button>
+		</td>
+		<td>
+			<button class="btn btn-danger" ng-click="deleteUser(user)">Delete</button>
+		</td>
+	</tr>
+ </tbody>
+</table>
+</div>
+</div>
+</body>
+</html>
